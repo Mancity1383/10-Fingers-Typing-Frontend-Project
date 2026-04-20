@@ -1,0 +1,98 @@
+.container {
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: white;
+
+  padding: 5px 20px;
+  margin: 0 auto;
+
+  position: relative;
+}
+
+.sidebarToggle {
+  position: fixed;
+  top: 18px;
+  right: 18px;
+
+  background: transparent;
+  border: none;
+  border-radius: 12px;
+
+  width: 44px;
+  height: 44px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: #2c2c2c;
+  cursor: pointer;
+
+
+  transition: all 0.2s ease;
+}
+
+.sidebarToggle:hover {
+  background:#efefef;
+}
+
+.sidebarToggle:active {
+  transform: translateY(0);
+}
+
+/* Header */
+.projectHeader {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  margin-bottom: 20px;
+  margin-top: -40px;
+}
+
+.projectIcon {
+  width: 230px;
+  height: auto;
+  filter: drop-shadow(0 8px 20px rgba(0,0,0,0.12));
+}
+
+.projectTitle {
+  font-size: 22px;
+  font-weight: 700;
+  color: #222;
+  margin-top: -32px;
+  letter-spacing: 0.6px;
+  text-align: center;
+
+  background: linear-gradient(
+    90deg,
+    #464646 0%,
+    #5c5c5c 40%,
+    #7c7c7c
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+  animation: fadeInTitle 0.8s ease-in-out;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+@keyframes fadeInTitle {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}

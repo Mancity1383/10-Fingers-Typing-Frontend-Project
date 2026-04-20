@@ -1,0 +1,31 @@
+/* Remove default browser styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Smooth, modern font */
+body {
+  font-family: "Inter", system-ui, Avenir, Helvetica, Arial, sans-serif;
+  background: #ffffff;
+  color: #222;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Prevent scrollbars unless necessary */
+html, body {
+  height: 100%;
+}
+
+/* Links clean */
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Prevent text selection glitches */
+button, input {
+  font-family: inherit;
+}
