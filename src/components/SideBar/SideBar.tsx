@@ -1,58 +1,57 @@
 import styles from "./SideBar.module.css";
-import { useDispatch } from "react-redux";
-import { resetGame, setMainText } from "../../features/keyboardSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { resetGame, setMainText, updateActivePresetId } from "../../features/keyboardSlice";
+import emptyStarImage from "../../assets/star_2.png";
+import filledStarImage from "../../assets/star.png";
+import type { RootState } from "../../store/store";
+import { motion } from "framer-motion";
+import CreateNewPracticeModal from "../CreateNewPracticeModal/CreateNewPracticeModal";
+import { useState } from "react";
 
 type Props = {
     open: boolean;
     onClose: () => void;
 };
 
-const presets = [
-    {
-        id: "easy-hello-world",
-        title: "Warmup – Hello World",
-        text: "Hello world! This is a simple typing warmup to get your fingers moving.",
-        difficulty: "Easy",
-        length: "Short",
-        tags: ["warmup", "beginner"],
-    },
-    {
-        id: "medium-productivity",
-        title: "Productivity Focus",
-        text: "Staying focused while typing helps improve accuracy and speed over time.",
-        difficulty: "Medium",
-        length: "Medium",
-        tags: ["focus", "accuracy"],
-    },
-    {
-        id: "hard-programming",
-        title: "Code Style Snippet",
-        text: `function typingPractice() {
-return "Train your fingers to write clean and consistent code.";
-}`,
-        difficulty: "Hard",
-        length: "Medium",
-        tags: ["code", "symbols"],
-    },
-];
-
 export default function Sidebar({ open, onClose }: Props) {
+    const [CreateNewPracticeModalOpen, setCreateNewPracticeModalOpen] = useState(false);
     const dispatch = useDispatch();
-
-    const handleSelectPreset = (text: string) => {
+    const handleSelectPreset = (id: number, text: string) => {
+        dispatch(updateActivePresetId(id));
         dispatch(setMainText(text));
         dispatch(resetGame())
+    };
+    const { scores,presets } = useSelector((state: RootState) => state.userData);
+
+    const containerVariants = {
+        hidden: { opacity: 0 },
+        visible: {
+            opacity: 1,
+            transition: {
+                staggerChildren: 0.1,
+                delayChildren: 0.2,
+            },
+        },
+    };
+
+    const starVariants = {
+        hidden: { opacity: 0, scale: 0, y: 10 },
+        visible: {
+            opacity: 1,
+            scale: 1,
+            y: 0,
+            transition: { type: "spring", stiffness: 260, damping: 20 }
+        },
     };
 
     return (
         <>
-            {/* Overlay */}
+            <CreateNewPracticeModal open={CreateNewPracticeModalOpen} onClose={() => setCreateNewPracticeModalOpen(false)}
+             onOpen={() => setCreateNewPracticeModalOpen(true)} />
             <div
                 className={`${styles.overlay} ${open ? styles.show : ""}`}
                 onClick={onClose}
             />
-
-            {/* Sidebar */}
             <aside className={`${styles.sidebar} ${open ? styles.open : ""}`}>
                 <div className={styles.header}>
                     <div>
@@ -72,10 +71,34 @@ export default function Sidebar({ open, onClose }: Props) {
                             <button
                                 key={preset.id}
                                 className={styles.presetItem}
-                                onClick={() => handleSelectPreset(preset.text)}
+                                onClick={() => handleSelectPreset(preset.id, preset.text)}
                             >
                                 <div className={styles.presetHeader}>
-                                    <span className={styles.presetTitle}>{preset.title}</span>
+                                    <div className={styles.presetHeaderInfo}>
+                                        <span className={styles.presetTitle}>{preset.title}</span>
+                                        <motion.div
+                                            className={styles.starRating}
+                                            variants={containerVariants}
+                                            initial="hidden"
+                                            animate={open ? "visible" : "hidden"}
+                                        >
+                                            {[...Array(5)].map((_, index) => {
+                                                const score = scores?.[preset.id] ?? 0;
+                                                const isFilled = index < score;
+
+                                                return (
+                                                    <motion.img
+                                                        key={index}
+                                                        variants={starVariants}
+                                                        src={isFilled ? filledStarImage : emptyStarImage}
+                                                        alt="star"
+                                                        className={styles.starIcon}
+                                                        whileHover={{ scale: 1.2 }}
+                                                    />
+                                                );
+                                            })}
+                                        </motion.div>
+                                    </div>
                                     <span
                                         className={`${styles.difficulty} ${preset.difficulty === "Easy"
                                             ? styles.easy
@@ -101,6 +124,13 @@ export default function Sidebar({ open, onClose }: Props) {
                             </button>
                         ))}
                     </div>
+                    <button
+                        className={styles.addPresetButton}
+                        onClick={() => setCreateNewPracticeModalOpen(true)}
+                        aria-label="Add new preset"
+                    >
+                        <span className={styles.plusIcon}>+</span>
+                    </button>
                 </div>
             </aside>
         </>

@@ -1,0 +1,97 @@
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.2);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modalContent {
+    background: #ffffff;
+    border-radius: 12px;
+    width: 60%;
+    max-width: 440px;
+    position: relative;
+    animation: slideUp 0.3s ease-out;
+}
+
+.modalContent::before {
+    content: "";
+    display: block;
+    height: 50px;
+    background-color: #f7cbd8;
+    width: 100%;
+}
+
+.body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 30px 40px 0px 40px;
+}
+
+.failImage {
+    width: 250px;
+    height: auto;
+}
+
+.failTitle {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 58px;
+    color: #e597ad;
+    font-weight: 700;
+    letter-spacing: -1px;
+}
+
+.failText {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    font-size: 17px;
+    font-weight: 500;
+    color: #4b5563;
+    line-height: 1.6;
+    text-align: center;
+    max-width: 300px;
+}
+
+.button {
+    background-color: #e597ad;
+    color: white;
+    border: none;
+    padding: 14px 60px;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+}
+
+.button:hover {
+    background-color: #d17d95;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(229, 151, 173, 0.3);
+}
+
+.footer {
+    display: flex;
+    justify-content: center;
+    padding: 20px 0 40px 0;
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(20px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}

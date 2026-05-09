@@ -1,8 +1,10 @@
-import { useSelector } from "react-redux";
 import { Modal } from "../Modal/Modal";
 import styles from "./ResultModal.module.css";
 import type { RootState } from "../../store/store";
 import { FaMedal } from "react-icons/fa";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { updateScore } from "../../features/userDataSlice";
 
 type Props = {
     open: boolean;
@@ -25,8 +27,26 @@ function getMedal(accuracy: number, wpm: number): MedalType {
     return "none";
 }
 
-export default function ResultModal({ open, onClose }: Props) {
+function calculateStars(accuracy: number, wpm: number): number {
+    if (accuracy >= 95 && wpm >= 60) {
+        return 5;
+    }
 
+    if (accuracy >= 90 && wpm >= 40) {
+        return 4;
+    }
+
+    if (accuracy >= 80 && wpm >= 20) {
+        return 3;
+    }
+    if (accuracy >= 70 && wpm >= 10) {
+        return 2;
+    }
+    return 1;
+}
+
+export default function ResultModal({ open, onClose }: Props) {
+    const dispatch = useDispatch();
     const {
         elapsedTime,
         accuracy,
@@ -36,7 +56,19 @@ export default function ResultModal({ open, onClose }: Props) {
         typedChars,
         correctCount,
         wrongCount,
+        activePresetId,
     } = useSelector((state: RootState) => state.keyboard);
+
+    useEffect(() => {
+        if (open && activePresetId) {
+            const starsEarned = calculateStars(accuracy ?? 0, speed ?? 0);
+
+            dispatch(updateScore({
+                id: activePresetId,
+                score: starsEarned
+            }));
+        }
+    }, [open, accuracy, speed, activePresetId, dispatch]);
 
     const medal = getMedal(accuracy ?? 0, speed ?? 0)
 

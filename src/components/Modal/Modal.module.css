@@ -40,20 +40,14 @@
     --modal-close-text-hover:#fff;
 }
 
-
-/* wrapper */
-
 .modalWrapper{
     position:fixed;
     inset:0;
-    z-index:9999;
+    z-index:100;
     display:flex;
     align-items:center;
     justify-content:center;
 }
-
-
-/* container */
 
 .modalContainer{
 
@@ -76,7 +70,6 @@
     -webkit-overflow-scrolling:touch;
 }
 
-/* hide scrollbar */
 .modalContainer::-webkit-scrollbar{
     display:none;
 }
@@ -88,23 +81,17 @@ dialog{
     padding:0;
 }
 
-
-/* backdrop */
-
 .modalBackdrop{
     position:fixed;
     inset:0;
     background:var(--modal-backdrop);
     backdrop-filter:blur(4px);
-    z-index:1001;
+    z-index:999;
 }
 
 dialog::backdrop{
     background:transparent;
 }
-
-
-/* header */
 
 .modalHeader{
 
@@ -119,9 +106,6 @@ dialog::backdrop{
 
     background:var(--modal-header-bg);
 }
-
-
-/* close button */
 
 .modalClose{
 
@@ -147,16 +131,10 @@ dialog::backdrop{
     color:var(--modal-close-text-hover);
 }
 
-
-/* body */
-
 .modalBody{
     padding:22px;
     line-height:1.5;
 }
-
-
-/* footer */
 
 .modalFooter{
     padding:18px 22px;
@@ -166,9 +144,6 @@ dialog::backdrop{
     justify-content:flex-end;
     gap:10px;
 }
-
-
-/* tablet */
 
 @media (max-width:1024px){
 
@@ -181,8 +156,6 @@ dialog::backdrop{
     }
 }
 
-
-/* mobile */
 
 @media (max-width:480px){
 

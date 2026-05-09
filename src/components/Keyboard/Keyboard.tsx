@@ -12,6 +12,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { type RootState } from "../../store/store";
 import {
     addActiveKey,
+    cleanActiveKey,
     removeActiveKey,
     setIsRunning,
 } from "../../features/keyboardSlice";
@@ -101,69 +102,126 @@ export default function Keyboard() {
     const dispatch = useDispatch();
     const wrongKeys = useSelector((state: RootState) => state.keyboard.wrongKeys);
 
-    const { activeKeys } = useSelector(
+    const { activeKeys, mainText, currentIndex } = useSelector(
         (state: RootState) => state.keyboard
     );
 
-    const codeMap: Record<string, string> = {
-        ShiftLeft: "Shift-L",
-        ShiftRight: "Shift-R",
-        ControlLeft: "Ctrl-L",
-        ControlRight: "Ctrl-R",
-        AltLeft: "Alt-L",
-        AltRight: "Alt-R",
-        MetaLeft: "Win",
-        MetaRight: "Win",
-        ContextMenu: "Context",
-        CapsLock: "Caps",
-        Space: "Space",
-        Tab: "Tab",
-        Enter: "Enter",
-        Backspace: "Backspace",
-    };
-
-    const normalizeKey = (e: KeyboardEvent) => {
-        if (e.code.startsWith("Key")) return e.code.replace("Key", "");
-        if (e.code.startsWith("Digit")) return e.code.replace("Digit", "");
-
-        const specialKeys: Record<string, string> = {
-            Backquote: "`",
-            Minus: "-",
-            Equal: "=",
-            BracketLeft: "[",
-            BracketRight: "]",
-            Backslash: "\\",
-            Semicolon: ";",
-            Quote: "'",
-            Comma: ",",
-            Period: ".",
-            Slash: "/",
-        };
-
-        if (specialKeys[e.code]) return specialKeys[e.code];
-        if (codeMap[e.code]) return codeMap[e.code];
-        return e.code;
-    };
-
     useEffect(() => {
-        const handleDown = (e: KeyboardEvent) => {
-            const physical = normalizeKey(e);
-            dispatch(addActiveKey(physical));
+        dispatch(cleanActiveKey());
+
+        const char = mainText[currentIndex];
+        if (!char) return;
+
+        const shiftMap: Record<string, string> = {
+            "~": "`",
+            "!": "1",
+            "@": "2",
+            "#": "3",
+            "$": "4",
+            "%": "5",
+            "^": "6",
+            "&": "7",
+            "*": "8",
+            "(": "9",
+            ")": "0",
+            "_": "-",
+            "+": "=",
+            "{": "[",
+            "}": "]",
+            "|": "\\",
+            ":": ";",
+            '"': "'",
+            "<": ",",
+            ">": ".",
+            "?": "/",
         };
 
-        const handleUp = (e: KeyboardEvent) => {
-            const physical = normalizeKey(e);
-            dispatch(removeActiveKey(physical));
+        const specialMap: Record<string, string> = {
+            " ": "Space",
+            "\n": "Enter",
+            "\t": "Tab",
         };
 
-        window.addEventListener("keydown", handleDown);
-        window.addEventListener("keyup", handleUp);
+        if (specialMap[char]) {
+            dispatch(addActiveKey(specialMap[char]));
+            return;
+        }
 
-        return () => {
-            window.removeEventListener("keydown", handleDown);
-            window.removeEventListener("keyup", handleUp);
-        };
-    }, [dispatch]);
+        if (shiftMap[char]) {
+            dispatch(addActiveKey(shiftMap[char]));
+            dispatch(addActiveKey("Shift-L"));
+            return;
+        }
+        if (char >= "A" && char <= "Z") {
+            dispatch(addActiveKey(char));
+            dispatch(addActiveKey("Shift-L"));
+            return;
+        }
+        
+        dispatch(addActiveKey(char.toUpperCase()));
+    }, [currentIndex, mainText, dispatch]);
+
+
+
+    // const codeMap: Record<string, string> = {
+    //     ShiftLeft: "Shift-L",
+    //     ShiftRight: "Shift-R",
+    //     ControlLeft: "Ctrl-L",
+    //     ControlRight: "Ctrl-R",
+    //     AltLeft: "Alt-L",
+    //     AltRight: "Alt-R",
+    //     MetaLeft: "Win",
+    //     MetaRight: "Win",
+    //     ContextMenu: "Context",
+    //     CapsLock: "Caps",
+    //     Space: "Space",
+    //     Tab: "Tab",
+    //     Enter: "Enter",
+    //     Backspace: "Backspace",
+    // };
+
+    // const normalizeKey = (e: KeyboardEvent) => {
+    //     if (e.code.startsWith("Key")) return e.code.replace("Key", "");
+    //     if (e.code.startsWith("Digit")) return e.code.replace("Digit", "");
+
+    //     const specialKeys: Record<string, string> = {
+    //         Backquote: "`",
+    //         Minus: "-",
+    //         Equal: "=",
+    //         BracketLeft: "[",
+    //         BracketRight: "]",
+    //         Backslash: "\\",
+    //         Semicolon: ";",
+    //         Quote: "'",
+    //         Comma: ",",
+    //         Period: ".",
+    //         Slash: "/",
+    //     };
+
+    //     if (specialKeys[e.code]) return specialKeys[e.code];
+    //     if (codeMap[e.code]) return codeMap[e.code];
+    //     return e.code;
+    // };
+
+    // useEffect(() => {
+    //     const handleDown = (e: KeyboardEvent) => {
+    //         const physical = normalizeKey(e);
+    //         dispatch(addActiveKey(physical));
+    //     };
+
+    //     const handleUp = (e: KeyboardEvent) => {
+    //         const physical = normalizeKey(e);
+    //         dispatch(removeActiveKey(physical));
+    //     };
+
+    //     window.addEventListener("keydown", handleDown);
+    //     window.addEventListener("keyup", handleUp);
+
+    //     return () => {
+    //         window.removeEventListener("keydown", handleDown);
+    //         window.removeEventListener("keyup", handleUp);
+    //     };
+    // }, [dispatch]);
 
     useEffect(() => {
         let timeoutId: ReturnType<typeof setTimeout>;

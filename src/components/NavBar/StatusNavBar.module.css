@@ -111,7 +111,6 @@
     transform: scale(1.02);
 }
 
-/* BUTTON CONTENT */
 .keyButtonContent {
     display: flex;
     align-items: center;
@@ -120,7 +119,6 @@
     font-weight: 600;
 }
 
-/* TEXT */
 .labelSmall {
     font-size: 11px;
     text-transform: uppercase;
@@ -155,8 +153,6 @@
     color: transparent;
 }
 
-
-/* ICON */
 .icon {
     width: 16px;
     height: 16px;
@@ -169,7 +165,6 @@
     color: var(--status-accent-red);
 }
 
-/* CARDS */
 .card {
     background: var(--status-card-bg);
     border-radius: var(--status-card-radius);
@@ -229,8 +224,6 @@
     margin: 3px 1px;
 }
 
-
-/* ---- ACCURACY ---- */
 .accuracyWrapper {
     display: flex;
     align-items: center;
@@ -284,10 +277,6 @@
     box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.22);
 }
 
-/* ---------------------------------------------------
-   SPEED GAUGE (White Theme + Dynamic Colors)
------------------------------------------------------ */
-
 .speedRow {
     display: flex;
     align-items: center;
@@ -303,8 +292,6 @@
     align-items: flex-end;
     justify-content: center;
 }
-
-/* Base gauge arc */
 .gaugeArc {
     position: relative;
     width: 100%;
@@ -323,7 +310,6 @@
         background 0.25s ease;
 }
 
-/* ---- dynamic color levels ---- */
 
 .speedLevel_0 {
     border-color: #d4d4d4;
@@ -359,7 +345,6 @@
         inset 0 0 15px rgba(239, 68, 68, 0.4);
 }
 
-/* needle */
 .gaugeNeedle {
     position: absolute;
     width: 2px;
@@ -378,7 +363,6 @@
     transition: transform 0.26s cubic-bezier(.28, .6, .3, 1);
 }
 
-/* center dot */
 .gaugeCenterDot {
     position: absolute;
     width: 9px;
@@ -395,7 +379,6 @@
     transform: translateX(-50%);
 }
 
-/* SPEED NUMBER */
 .speedMeta {
     display: flex;
     flex-direction: column;
@@ -403,7 +386,6 @@
     gap: 3px;
 }
 
-/* RESPONSIVE */
 @media (max-width: 900px) {
     .statusNavInner {
         grid-template-columns: 1fr;

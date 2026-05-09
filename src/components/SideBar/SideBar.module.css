@@ -1,4 +1,3 @@
-/* Dim background */
 .overlay {
   position: fixed;
   opacity: 0;
@@ -11,12 +10,11 @@
   pointer-events: auto;
 }
 
-/* Sidebar panel */
 .sidebar {
   position: fixed;
   top: 14px;
-  right: -320px;              /* hidden to the right */
-  width: 310px;
+  right: -320px;
+  width: 350px;
   height: calc(100vh - 32px);
 
   background: rgba(25, 25, 25, 0.96);
@@ -47,12 +45,11 @@
 }
 
 .open {
-  right: 16px; 
+  right: 16px;
   opacity: 1;
   transform: translateX(0);
 }
 
-/* Header */
 .header {
   display: flex;
   justify-content: space-between;
@@ -72,7 +69,6 @@
   color: #b3b3b3;
 }
 
-/* Close button */
 .closeButton {
   background: rgba(255, 255, 255, 0.04);
   border-radius: 999px;
@@ -82,7 +78,7 @@
 
   display: flex;
   align-items: center;
-  justify-content: center;  
+  justify-content: center;
 
   color: #e5e5e5;
   font-size: 16px;
@@ -101,7 +97,6 @@
   transform: translateY(0);
 }
 
-/* Content area */
 .content {
   flex: 1;
   margin-top: 4px;
@@ -110,14 +105,12 @@
   overflow-y: auto;
 }
 
-/* Example placeholder text */
 .placeholder {
   font-size: 13px;
   color: #c2c2c2;
   line-height: 1.5;
 }
 
-/* Optional: nice scrollbars (WebKit) */
 .content::-webkit-scrollbar {
   width: 6px;
 }
@@ -139,14 +132,12 @@
   margin-bottom: 8px;
 }
 
-/* Container of all presets */
 .presetList {
   display: flex;
   flex-direction: column;
   gap: 10px;
 }
 
-/* Each preset card (clickable) */
 .presetItem {
   width: 100%;
   text-align: left;
@@ -181,7 +172,6 @@
   box-shadow: none;
 }
 
-/* Top row: title + difficulty pill */
 .presetHeader {
   display: flex;
   justify-content: space-between;
@@ -193,7 +183,6 @@
   font-weight: 600;
 }
 
-/* Difficulty pill */
 .difficulty {
   font-size: 11px;
   padding: 2px 8px;
@@ -201,7 +190,6 @@
   border: 1px solid transparent;
 }
 
-/* Color variants for difficulty */
 .easy {
   background: rgba(46, 204, 113, 0.12);
   color: #2ecc71;
@@ -220,7 +208,6 @@
   border-color: rgba(231, 76, 60, 0.4);
 }
 
-/* Preview text */
 .presetPreview {
   font-size: 12px;
   color: #c7c7c7;
@@ -230,7 +217,6 @@
   text-overflow: ellipsis;
 }
 
-/* Bottom row: length + tags */
 .presetMeta {
   display: flex;
   gap: 6px;
@@ -253,4 +239,54 @@
   background: rgba(255, 255, 255, 0.02);
   border: 1px solid rgba(255, 255, 255, 0.08);
   color: #bfbfbf;
+}
+
+.starRating {
+  display: flex;
+  gap: 2px;
+  margin-bottom: 4px;
+}
+
+.starIcon {
+  width: 16px;
+  height: 16px;
+  object-fit: contain;
+}
+
+.presetHeaderInfo {
+  display: flex;
+  gap: 8px;
+  flex: 1;
+}
+
+.addPresetButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  margin: 20px auto;
+  background: transparent;
+  border: 2px dashed rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  cursor: pointer;
+  color: rgba(255, 255, 255, 0.6);
+
+  padding: 0;
+  overflow: hidden;
+  transition: border-color 0.2s, color 0.2s;
+}
+
+.addPresetButton:hover {
+  border-color: #fff;
+  color: #fff;
+}
+
+.plusIcon {
+  font-size: 22px;
+  font-weight: 300;
+  display: inline-flex;
+  line-height: 0;
+  margin-top: -3px;
+
 }

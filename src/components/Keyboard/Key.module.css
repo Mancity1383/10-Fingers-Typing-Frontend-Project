@@ -54,7 +54,6 @@
     --key-active-inner-text: #ffffff;
 }
 
-/* Base key */
 .key {
     background: var(--key-bg-base);
     border-radius: var(--key-border-radius);
@@ -80,8 +79,6 @@
         filter 0.14s ease,
         border-color 0.14s ease;
 }
-
-/* Palette variants (override base) */
 
 .keyLight {
     position: relative;
@@ -125,12 +122,10 @@
     color: var(--key-dark-text);
 }
 
-/* Space base */
 .keyYellow {
     position: relative;
 }
 
-/* Space line */
 .keyYellow::after {
     content: "";
     position: absolute;
@@ -158,8 +153,6 @@
     background: var(--key-accent-green-bg);
     color: var(--key-accent-green-text);
 }
-
-/* Typography & layout */
 
 .topLabel {
     font-size: var(--top-label-font-size);
@@ -210,8 +203,6 @@
     display: flex;
     align-items: center;
 }
-
-/* Active state */
 
 .active {
     background: var(--key-active-bg);

@@ -162,7 +162,6 @@
   background: rgba(107, 114, 128, 0.7);
 }
 
-/* پایه کاراکتر */
 .char {
   position: relative;
   min-width: 0.4em;
@@ -175,7 +174,6 @@
     border-color 0.12s ease;
 }
 
-/* span داخلی کاراکتر */
 .charInner {
   position: relative;
   z-index: 1;
@@ -186,7 +184,6 @@
   justify-content: center;
 }
 
-/* حالت کاراکتر فعلی (cursor) – باکس آبی */
 .char.activeChar {
   border-radius: 3px;
   font-weight: 600;
@@ -194,36 +191,30 @@
   box-shadow: var(--typing-active-shadow);
 }
 
-/* متن کاراکتر فعلی */
 .char.activeChar .charInner {
   color: var(--typing-active-text);
 }
 
-/* کاراکتر درست – باکس سبز */
 .char.correct {
   font-weight: 450;
   background-color: var(--typing-correct-bg);
 }
 
-/* رنگ متن درست */
 .char.correct .charInner {
   color: var(--typing-correct-text);
 }
 
-/* کاراکتر اشتباه – باکس قرمز */
 .char.wrong {
   font-weight: 450;
   background-color: var(--typing-wrong-bg);
 }
 
-/* رنگ متن اشتباه + underline موج‌دار */
 .char.wrong .charInner {
   color: var(--typing-wrong-text);
   text-decoration: underline var(--typing-wrong-underline);
   text-underline-offset: 3px;
 }
 
-/* SPACE */
 .spaceChar {
   position: relative;
   padding: 0 4px;
@@ -258,7 +249,6 @@
   color: var(--typing-space-label-color);
 }
 
-/* وقتی space فعال است (cursor روی آن است) – آبی‌تر */
 .spaceChar.activeChar .charInner::before {
   background-color: var(--typing-space-active-bg);
   box-shadow: var(--typing-space-active-shadow);
@@ -268,7 +258,6 @@
   color: var(--key-active-border);
 }
 
-/* space درست – باکس سبز مثل بقیه */
 .spaceChar.char.correct .charInner::before {
   background-color: var(--typing-space-correct-bg);
   box-shadow: var(--typing-space-correct-shadow);
@@ -278,7 +267,6 @@
   color: var(--typing-space-correct-label);
 }
 
-/* space اشتباه – باکس قرمز مثل بقیه */
 .spaceChar.char.wrong .charInner::before {
   background-color: var(--typing-space-wrong-bg);
   box-shadow: var(--typing-space-wrong-shadow);
@@ -288,7 +276,6 @@
   color: var(--typing-space-wrong-label);
 }
 
-/* Caret */
 .caret {
   position: absolute;
   left: -1px;
@@ -310,7 +297,6 @@
   }
 }
 
-/* Hidden input */
 .hiddenInput {
   position: absolute;
   opacity: 0;
@@ -333,8 +319,6 @@
   font-weight: 600;
 }
 
-
-/* Mobile */
 @media (max-width: 640px) {
   .wrapper {
     padding: var(--typing-mobile-wrapper-padding-y)

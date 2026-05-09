@@ -20,6 +20,7 @@ interface KeyboardState {
     isRunning: boolean;
     restartKey: number,
     currentIndex: number;
+    activePresetId : number,
 }
 
 const initialState: KeyboardState = {
@@ -37,6 +38,7 @@ const initialState: KeyboardState = {
     elapsedTime: 0,
     isRunning: false,
     currentIndex: 0,
+    activePresetId : 1,
 };
 
 const keyboardSlice = createSlice({
@@ -86,7 +88,9 @@ const keyboardSlice = createSlice({
         removeActiveKey(state, action: PayloadAction<string>) {
             state.activeKeys = state.activeKeys.filter((k) => k !== action.payload);
         },
-
+        cleanActiveKey(state){
+            state.activeKeys = []
+        },
         addWrongKey(state, action: PayloadAction<string>) {
             const key = action.payload.toUpperCase();
             if (!state.wrongKeys.includes(key)) {
@@ -150,6 +154,10 @@ const keyboardSlice = createSlice({
                 state.speed = 0;
             }
         },
+
+        updateActivePresetId(state, action: PayloadAction<number>) {
+            state.activePresetId = action.payload;
+        }
     },
 });
 
@@ -166,6 +174,8 @@ export const {
     addWrongKey,
     removeWrongKey,
     incrementElapsedTime,
+    cleanActiveKey,
+    updateActivePresetId,
 } = keyboardSlice.actions;
 
 export default keyboardSlice.reducer;

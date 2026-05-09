@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import styles from "./TypingBox.module.css";
-import keyPressSound from "../../../public/sounds/keysound.wav"
+import keyPressSound from "/sounds/keysound.wav"
 import {
   addCharResult,
   removeCharResult,
