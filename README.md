@@ -1,73 +1,79 @@
-# React + TypeScript + Vite
+# 10 Fingers Type
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern typing practice app built with React, TypeScript, Redux Toolkit, and Vite. It helps users train speed and accuracy with selectable practice texts, a visual keyboard, instant mistake feedback, and end-of-session results.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- Practice typing with built-in text presets
+- Create custom practice texts with title, difficulty, length, and tags
+- Visual keyboard that highlights the next expected key
+- Wrong-key feedback while typing
+- Live tracking for accuracy, speed, typed characters, and errors
+- Session summary with time, WPM, accuracy, errors, and medal feedback
+- Star-based best score tracking per preset
+- Slide-out sidebar for choosing practice items
+- Keyboard sound feedback for a more interactive experience
 
-## React Compiler
+## Tech Stack
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- React 19
+- TypeScript
+- Vite
+- Redux Toolkit and React Redux
+- React Router
+- React Hook Form and Zod
+- Framer Motion
+- CSS Modules
+- Lucide React and React Icons
 
-## Expanding the ESLint configuration
+## Getting Started
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+### Prerequisites
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+- Node.js
+- npm
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+### Installation
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm install
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### Run the Development Server
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm run dev
 ```
+
+Open the local URL printed by Vite in your browser.
+
+## Project Structure
+
+```text
+src/
+  assets/       Static images used by the interface
+  components/   Reusable UI and typing experience components
+  features/     Redux slices for keyboard state and user progress
+  hook/         Custom React hooks
+  pages/        App pages
+  store/        Redux store configuration
+```
+
+## Project Picture
+<p align="center">
+  <img src="./images/1.png" width="700" alt="Project Screenshot 1" />
+  <br>
+  <img src="./images/2.png" width="700" alt="Project Screenshot 2" />
+  <br>
+  <img src="./images/3.png" width="700" alt="Project Screenshot 3" />
+</p>
+
+## How It Works
+
+Choose a practice text from the sidebar or create your own. The app shows the target text and highlights the next key on the on-screen keyboard. As you type, it records correct and incorrect characters, updates accuracy and speed, and shows a result modal when the practice is complete.
+
+## Notes
+
+- Custom practice items and scores are stored in Redux state during the current session.
+- The default route is `/`.
+- The app is optimized for keyboard-driven practice.
